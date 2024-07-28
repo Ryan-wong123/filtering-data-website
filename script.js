@@ -37,12 +37,17 @@ const initializeWebsite = (laptops) => {
 };
 
 // Higher-Order Function for Filtering
+
 const filterLaptops = (laptops, criteria) => {
     return laptops.filter(laptop => {
-        return Object.keys(criteria).every(key => laptop[key] === criteria[key]);
+        return Object.keys(criteria).every(key => {
+            if (typeof criteria[key] === 'function') {
+                return criteria[key](laptop[key]);
+            }
+            return laptop[key] === criteria[key];
+        });
     });
 };
-
 // Pure Function for Calculating Total Brands
 const getTotalBrands = (laptops) => {
     const brands = laptops.map(laptop => laptop.Company);
@@ -53,27 +58,36 @@ const getTotalBrands = (laptops) => {
 const displayLaptops = (laptops) => {
     const laptopContainer = document.getElementById('laptops');
     laptopContainer.innerHTML = '';
-    laptops.forEach(laptop => {
-        const laptopElement = document.createElement('div');
-        laptopElement.className = 'laptop';
-        laptopElement.innerHTML = `
-            <h3>${laptop['Product'] || 'Unknown'}</h3>
-            <p>Company: ${laptop['Company'] || 'Unknown'}</p>
-            <p>Price: $${laptop['Price_euros'] || 'Unknown'}</p>
-            <p>Laptop Type: ${laptop['TypeName'] || 'Unknown'}</p>
-            <p>Screen Size: ${laptop['Inches'] || 'Unknown'}</p>
-            <p>Screen Resolution: ${laptop['ScreenResolution'] || 'Unknown'}</p>
-            <p>CPU: ${laptop['Cpu'] || 'Unknown'}</p>
-            <p>RAM: ${laptop['Ram'] || 'Unknown'}</p>
-            <p>Memory: ${laptop['Memory'] || 'Unknown'}</p>
-            <p>GPU: ${laptop['Gpu'] || 'Unknown'}</p>
-            <p>Operating System: ${laptop['OpSys'] || 'Unknown'}</p>
-            <p>Weight: ${laptop['Weight'] || 'Unknown'}</p>
-        `;
-        laptopContainer.appendChild(laptopElement);
-    });
-};
+    if (laptops.length === 0) {
+        const noDataElement = document.createElement('div');
+        noDataElement.className = 'no-data';
+        noDataElement.textContent = 'No data available';
+        laptopContainer.appendChild(noDataElement);
+    } 
+    else{
+        laptops.forEach(laptop => {
+            const laptopElement = document.createElement('div');
+            laptopElement.className = 'laptop';
+            laptopElement.innerHTML = `
+                <h3>${laptop['Product'] || 'Unknown'}</h3>
+                <p>Company: ${laptop['Company'] || 'Unknown'}</p>
+                <p>Price: $${laptop['Price_euros'] || 'Unknown'}</p>
+                <p>Laptop Type: ${laptop['TypeName'] || 'Unknown'}</p>
+                <p>Screen Size: ${laptop['Inches'] || 'Unknown'}</p>
+                <p>Screen Resolution: ${laptop['ScreenResolution'] || 'Unknown'}</p>
+                <p>CPU: ${laptop['Cpu'] || 'Unknown'}</p>
+                <p>RAM: ${laptop['Ram'] || 'Unknown'}</p>
+                <p>Memory: ${laptop['Memory'] || 'Unknown'}</p>
+                <p>GPU: ${laptop['Gpu'] || 'Unknown'}</p>
+                <p>Operating System: ${laptop['OpSys'] || 'Unknown'}</p>
+                <p>Weight: ${laptop['Weight'] || 'Unknown'}</p>
+            `;
+            laptopContainer.appendChild(laptopElement);
+        });
+    }
 
+
+};
 
 const applyFilters = () => {
     const manufacturer = document.getElementById('manufacturer').value;
@@ -86,9 +100,9 @@ const applyFilters = () => {
 
     if (priceRange) {
         const [minPrice, maxPrice] = priceRange.split('-').map(Number);
-        criteria['Price_euros'] = laptop => {
-            const price = parseFloat(laptop['Price_euros']);
-            return price >= minPrice && price <= maxPrice;
+        criteria['Price_euros'] = price => {
+            const parsedPrice = parseFloat(price);
+            return parsedPrice >= minPrice && parsedPrice <= maxPrice;
         };
     }
 
