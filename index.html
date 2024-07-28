@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Guide for Students</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Laptop Guide for Students</h1>
+    </header>
+    <main>
+        <section id="filters">
+            <h2>Filter Laptops by product and price</h2>
+            <form id="filter-form">
+                <label for="manufacturer">Manufacturer:</label>
+                <select id="manufacturer">
+                    <option value="">All</option>
+                    <option value="Acer">Acer</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Asus">Asus</option>
+                    <option value="Chuwi">Chuwi</option>
+                    <option value="Dell">Dell</option>
+                    <option value="Fujitsu">Fujitsu</option>
+                    <option value="Google">Google</option>
+                    <option value="HP">HP</option>
+                    <option value="Huawei">Huawei</option>
+                    <option value="Lenovo">Lenovo</option>
+                    <option value="LG">LG</option>
+                    <option value="Mediacom">Mediacom</option>
+                    <option value="Microsoft">Microsoft</option>
+                    <option value="MSI">MSI</option>
+                    <option value="Razer">Razer</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Toshiba">Toshiba</option>
+                    <option value="Vero">Vero</option>
+                    <option value="Xiaomi">Xiaomi</option>
+                    <!-- Add other manufacturers as needed -->
+                </select>
+                
+                <label for="price">Price Range:</label>
+                <select id="price">
+                    <option value="">All</option>
+                    <option value="0-500">Below $500</option>
+                    <option value="500-1000">$500 - $1000</option>
+                    <option value="1000-999999">Above $1000</option>
+                </select>
+                
+                <button type="submit">Apply Filters</button>
+            </form>
+        </section>
+        <section id="laptop-list">
+            <h2>Available Laptops</h2>
+            <div id="laptops"></div>
+        </section>
+        
+        <section id="statistics">
+            <h2>Statistics</h2>
+            <p>Total Brands: <span id="total-brands"></span></p>
+        </section>
+    </main>
+</body>
+</html>

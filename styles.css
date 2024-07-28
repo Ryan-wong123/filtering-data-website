@@ -1,0 +1,95 @@
+/* styles.css */
+
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+/* Header styling */
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Main content styling */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Section styling */
+section {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    margin-bottom: 15px;
+}
+
+/* Laptop list styling */
+#laptop-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.laptop {
+    background: #e9e9e9;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.laptop h3 {
+    margin-bottom: 10px;
+}
+
+.laptop p {
+    margin: 5px 0;
+}
+
+/* Filter section styling */
+#filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Statistics section styling */
+#statistics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#statistics p {
+    margin: 5px 0;
+}
